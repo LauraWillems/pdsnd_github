@@ -10,9 +10,9 @@ Udacity project Bikeshare
 This project aims at analyzing bikesharing data from 3 cities.
 
 ### Files used
-bikeshare.py
-chicago.csv
-new_york_city.csv
+bikeshare.py,
+chicago.csv,
+new_york_city.csv,
 washington.csv
 
 ### Credits
