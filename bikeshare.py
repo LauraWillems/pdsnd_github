@@ -210,6 +210,7 @@ def chunk_raw_input(df, size):
     Divide the dataframe into chunks of a given size
     Ask user if more data needs to be displayed 
     and double check if the answer is not yes.
+    Depending on the answer add more lines of raw data or not.
     """
     answer = True  #aks the question at least once
     i = 0
