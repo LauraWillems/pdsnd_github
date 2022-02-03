@@ -4,10 +4,10 @@
 Project and README file created on 3/2/2022.
 
 ### Project Title
-Replace the Project Title
+Udacity project Bikeshare
 
 ### Description
-Describe what your project is about and what it does
+This project aims at analyzing bikesharing data from 3 cities.
 
 ### Files used
 Include the files used
