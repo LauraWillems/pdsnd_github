@@ -125,6 +125,7 @@ def station_stats(df):
     # display most frequent combination of start station and end station trip
     df['Start to End trip'] = df['Start Station'] + ' - ' + df['End Station']
     popular_trip = df.mode()['Start to End trip'][0]
+    most_popular_trip = df.groupby(['Start Station', 'End Station']).size().idxmax()
     print('\nMost Frequent trip (start - end station): ', popular_trip)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
