@@ -25,9 +25,9 @@ def get_filters():
     day = ''
 
     print('Hello! Let\'s explore some US bikeshare data!')
-     
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    while city not in CITY_DATA.keys():
+    while city not in CITY_DATA:
         city = str(input("Enter a city (chicago, new york city, washington): ")).lower()
 
     # get user input for month (all, january, february, ... , june)
@@ -53,24 +53,24 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    
+
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract month and day of week from the Start Time column to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.dayofweek
-    
+
     # filter by month if applicable
     if month != month_list[0]:
         # use the index of the months list to get the corresponding int
         month = month_list.index(month)
         # filter by month to create the new dataframe
         df = df[df.month == month]
-    
+
     # filter by day of week if applicable
     if day != day_list[0]:
         # filter by day of week to create the new dataframe
@@ -156,7 +156,7 @@ def user_stats(df):
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
-    
+
     # Display counts of user types
     user_types = df['User Type'].value_counts()
     total_count = df.shape[0]
@@ -177,7 +177,7 @@ def user_stats(df):
     if 'Birth Year' in df.columns:
         count_birth_year = np.count_nonzero(df['Birth Year'].values == df.mode()['Birth Year'][0])
         print('\nOldest person for the filters chosen is from {}, youngest from {} and most common birth year is {} ({} hits)'
-              .format(int(df['Birth Year'].min()), int(df['Birth Year'].max()), int(df.mode()['Birth Year'][0]), count_birth_year))    
+              .format(int(df['Birth Year'].min()), int(df['Birth Year'].max()), int(df.mode()['Birth Year'][0]), count_birth_year))
     else: print('\nNo birth date statistics available for this city')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -185,14 +185,14 @@ def user_stats(df):
 
 def raw_input(df):
     """
-    Asks user if raw data needs to be displayed, 
-    if so the number of hits per time is asked. 
+    Asks user if raw data needs to be displayed,
+    if so the number of hits per time is asked.
     """
     size = 0
     answer = input('\nWould you like to see some raw data? Type yes if yes, anything else if no. ')
     if answer.lower() == 'yes':
         while size == 0:
-            try: 
+            try:
                 size = int(input('\nType the nummber of hits you would like to see at once: '))
             except:
                 print('\nThe input was not an integer, please try again')
@@ -204,11 +204,11 @@ def raw_input(df):
                 for j in chunk.columns:
                     print('\n{}: {} '.format(j,chunk[j][i]))
                 print('-'*40)
-    
+
 def chunk_raw_input(df, size):
     """
     Divide the dataframe into chunks of a given size
-    Ask user if more data needs to be displayed 
+    Ask user if more data needs to be displayed
     and double check if the answer is not yes.
     """
     answer = True  #aks the question at least once
@@ -238,4 +238,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
